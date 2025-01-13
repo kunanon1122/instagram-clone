@@ -27,6 +27,13 @@ export default {
         15: "3.75rem",
         21: "5.25rem",
       },
+      maxWidth: {
+        61: "15.25rem",
+        117: "29.25rem",
+      },
+      padding: {
+        0.25: "0.063rem",
+      },
     },
   },
   plugins: [],
