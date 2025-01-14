@@ -10,7 +10,7 @@ export type ProfileProps = {
   border?: boolean;
 };
 
-const Profile: FC<ProfileProps> = ({ url, id, size, cover, border }) => {
+const Profile: FC<ProfileProps> = ({ url, id, size, cover = true, border }) => {
   const sizeImg = useMemo(() => {
     switch (size) {
       case "xs":

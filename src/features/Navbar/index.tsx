@@ -37,10 +37,11 @@ export const Navbar = () => {
               url={post.url}
               id={post.id}
               size="lg"
-              cover
               border
             />
-            <SubTitle className="text-center" truncate size="sm">{post.id}</SubTitle>
+            <SubTitle className="text-center" truncate size="sm">
+              {post.id}
+            </SubTitle>
           </SwiperSlide>
         ))}
       </Swiper>
