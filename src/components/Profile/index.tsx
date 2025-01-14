@@ -5,7 +5,7 @@ import clsx from "clsx";
 export type ProfileProps = {
   id: string;
   url: string;
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
   cover?: boolean;
   border?: boolean;
 };
@@ -13,6 +13,8 @@ export type ProfileProps = {
 const Profile: FC<ProfileProps> = ({ url, id, size, cover, border }) => {
   const sizeImg = useMemo(() => {
     switch (size) {
+      case "xs":
+        return "w-6 h-6";
       case "sm":
         return "w-8 h-8";
       case "md":
@@ -37,6 +39,7 @@ const Profile: FC<ProfileProps> = ({ url, id, size, cover, border }) => {
           "rounded-full border-2 border-white",
           cover && "object-cover"
         )}
+        priority
         unoptimized
         src={url}
         alt={`profile-${id}`}

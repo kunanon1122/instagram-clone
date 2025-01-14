@@ -3,8 +3,9 @@ import clsx from "clsx";
 
 export type SubTitleProps = {
   className?: string;
-  size?: "sm" | "base" | "lg";
+  size?: "sm" | "base" | "lg" | "xl";
   gray?: boolean;
+  bold?: boolean;
   truncate?: boolean;
 } & PropsWithChildren;
 
@@ -13,6 +14,7 @@ const SubTitle: FC<SubTitleProps> = ({
   className,
   gray,
   size,
+  bold,
   truncate,
 }) => {
   const sizeClass = useMemo(() => {
@@ -21,6 +23,8 @@ const SubTitle: FC<SubTitleProps> = ({
         return "text-sm";
       case "lg":
         return "text-lg";
+      case "xl":
+        return "text-xl";
       default:
         return "text-base";
     }
@@ -31,6 +35,7 @@ const SubTitle: FC<SubTitleProps> = ({
     truncate && "truncate",
     "break-words",
     gray && "text-gray-500",
+    bold && "font-semibold",
     sizeClass
   );
 
