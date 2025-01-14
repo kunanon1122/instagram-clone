@@ -1,6 +1,9 @@
 import React, { FC } from "react";
 import clsx from "clsx";
 
+import SubTitle from "@/components/SubTitle";
+import SearchInput from "@/features/SearchInput";
+
 interface SearchProps {
   isOpenSearch: boolean;
 }
@@ -15,7 +18,25 @@ export const Search: FC<SearchProps> = ({ isOpenSearch }) => {
           : "transform -translate-x-full"
       )}
     >
-      <div>Search Detail</div>
+      <SubTitle className="my-2 pt-3 pl-6 pr-3 pb-7" bold size="2.5xl">
+        ค้นหา
+      </SubTitle>
+
+      <div className="mx-4">
+        <SearchInput isOpenSearch={isOpenSearch} autoFocus />
+      </div>
+
+      <hr />
+
+      <SubTitle className="my-2 pt-3 pl-6 pr-3 pb-7" bold size="lg">
+        ล่าสุด
+      </SubTitle>
+
+      <div className="h-3/5 flex flex-col justify-center items-center text-gray-500">
+        <SubTitle bold gray>
+          ไม่มีการค้นหาล่าสุด
+        </SubTitle>
+      </div>
     </div>
   );
 };

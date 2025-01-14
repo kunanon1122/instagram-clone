@@ -42,6 +42,9 @@ export default {
       padding: {
         0.25: "0.063rem",
       },
+      fontSize: {
+        "2.5xl": "1.6rem",
+      },
     },
   },
   plugins: [],

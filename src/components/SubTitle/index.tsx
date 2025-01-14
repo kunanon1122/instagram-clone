@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 export type SubTitleProps = {
   className?: string;
-  size?: "sm" | "base" | "lg" | "xl";
+  size?: "sm" | "base" | "lg" | "xl" | "2.5xl";
   gray?: boolean;
   bold?: boolean;
   truncate?: boolean;
@@ -25,6 +25,8 @@ const SubTitle: FC<SubTitleProps> = ({
         return "text-lg";
       case "xl":
         return "text-xl";
+      case "2.5xl":
+        return "text-2.5xl";
       default:
         return "text-base";
     }
