@@ -13,7 +13,7 @@ export type CardPostMainProps = {
 
 const CardPostMain: FC<CardPostMainProps> = ({ post }) => {
   return (
-    <div key={post.id} className="mb-5">
+    <div className="mb-5">
       <div className="flex gap-1 items-center mb-3">
         <Profile url={post.url} id={post.id} size="sm" />
         <Title>{post.id}</Title>
@@ -25,6 +25,7 @@ const CardPostMain: FC<CardPostMainProps> = ({ post }) => {
         </SubTitle>
       </div>
       <Image
+        unoptimized
         className="rounded"
         src={post.url}
         alt={post.id}

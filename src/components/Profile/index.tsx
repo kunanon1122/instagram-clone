@@ -1,34 +1,49 @@
 import React, { FC, useMemo } from "react";
 import Image from "next/image";
+import clsx from "clsx";
 
 export type ProfileProps = {
   id: string;
   url: string;
   size?: "sm" | "md" | "lg";
+  cover?: boolean;
+  border?: boolean;
 };
 
-const Profile: FC<ProfileProps> = ({ url, id, size }) => {
+const Profile: FC<ProfileProps> = ({ url, id, size, cover, border }) => {
   const sizeImg = useMemo(() => {
     switch (size) {
       case "sm":
-        return 32;
+        return "w-8 h-8";
       case "md":
-        return 44;
+        return "w-11 h-11";
       case "lg":
-        return 56;
+        return "w-14 h-14";
       default:
-        return 32;
+        return "w-8 h-8";
     }
   }, [size]);
 
   return (
-    <Image
-      className="rounded-full w-8 h-8 object-cover"
-      src={url}
-      alt={`profile-${id}`}
-      height={sizeImg}
-      width={sizeImg}
-    />
+    <div
+      className={clsx(
+        "relative p-2 flex-shrink-0 flex-grow-0",
+        border && "rainbow-border",
+        sizeImg
+      )}
+    >
+      <Image
+        className={clsx(
+          "rounded-full border-2 border-white",
+          cover && "object-cover"
+        )}
+        unoptimized
+        src={url}
+        alt={`profile-${id}`}
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
+    </div>
   );
 };
 

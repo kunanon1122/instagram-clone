@@ -30,6 +30,7 @@ export default {
       maxWidth: {
         61: "15.25rem",
         117: "29.25rem",
+        157.5: "39.375rem",
       },
       padding: {
         0.25: "0.063rem",
