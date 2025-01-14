@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Image from "next/image";
+import clsx from "clsx";
 
 import type { RootState } from "@/redux/store";
 
@@ -10,178 +11,124 @@ import Button from "@/components/Button";
 import SubTitle from "@/components/SubTitle";
 import Profile from "@/components/Profile";
 
-enum CurrentMenu {
-  HOME = "home",
-  SEARCH = "search",
-  EXPLORE = "explore",
-  REELS = "reels",
-  MESSAGE = "message",
-  LIKE = "like",
-  ADD = "add",
-  PROFILE = "profile",
-}
+import { CurrentMenu, menuItems } from "@/variables/Menu";
 
 export const SideBar = () => {
   const posts = useSelector((state: RootState) => state.posts.posts);
   const width = useWindowWidth();
 
   const [currentMenu, setCurrentMenu] = useState<CurrentMenu>(CurrentMenu.HOME);
+  const [isExpand, setIsExpand] = useState(false);
 
   const handleMenu = (menu: CurrentMenu) => {
     setCurrentMenu(menu);
   };
 
+  useEffect(() => {
+    if (width && width > 1265) {
+      setIsExpand(true);
+    } else {
+      setIsExpand(false);
+    }
+  }, [width]);
+
   return (
-    <div className="flex flex-col justify-between border-r border-black px-3 pt-2 pb-5 h-screen sticky top-0">
-      <div>
-        <div>{width}</div>
-        <div className="pt-7 pb-4 px-2 mb-3">
-          <Image
-            priority
-            src="/img/instagram_logo.svg"
-            alt="instagram_logo"
-            height={37}
-            width={109}
-          />
+    <div
+      className={clsx(
+        "hidden md:block w-full transition-all",
+        isExpand ? "max-w-61" : "max-w-18"
+      )}
+    >
+      <div className="flex flex-col justify-between border-r border-gray-300 px-3 pt-2 pb-5 h-screen sticky top-0">
+        <div>
+          {/* ----- Logo ----- */}
+          <div
+            className={clsx(
+              isExpand ? "pt-7 pb-4 px-2 mb-3" : "mt-3 pt-4 pb-9 px-3"
+            )}
+          >
+            {isExpand ? (
+              <Image
+                priority
+                src="/img/instagram_logo.svg"
+                alt="instagram_logo"
+                height={37}
+                width={109}
+              />
+            ) : (
+              <Image
+                priority
+                src="/img/instagram_mini_logo.svg"
+                alt="instagram_mini_logo"
+                height={24}
+                width={24}
+              />
+            )}
+          </div>
+          {/* ----- Logo End ----- */}
+
+          {/* ----- Menu Midden ----- */}
+          {menuItems.map((item) => (
+            <Button
+              key={item.menu}
+              className={clsx(
+                "w-full text-left gap-4 p-3",
+                isExpand ? "my-1" : "my-2.5"
+              )}
+              left
+              onClick={() => handleMenu(item.menu)}
+            >
+              <Image
+                src={item.icon}
+                alt={`${item.menu}-icon`}
+                height={22}
+                width={22}
+              />
+              {isExpand && (
+                <SubTitle
+                  className={clsx(!isExpand && "hidden")}
+                  size="lg"
+                  bold={currentMenu === item.menu}
+                >
+                  {item.label}
+                </SubTitle>
+              )}
+            </Button>
+          ))}
+
+          <Button
+            className="w-full text-left gap-4 my-1 p-3"
+            left
+            onClick={() => handleMenu(CurrentMenu.PROFILE)}
+          >
+            {posts[0] && (
+              <Profile url={posts[0].url} id={posts[0].id} size="xs" />
+            )}
+            {isExpand && (
+              <SubTitle size="lg" bold={currentMenu === CurrentMenu.PROFILE}>
+                โปรไฟล์
+              </SubTitle>
+            )}
+          </Button>
+          {/* ----- Menu Midden End ----- */}
         </div>
 
-        <Button
-          className="w-full text-left gap-4 my-1 p-3"
-          left
-          onClick={() => handleMenu(CurrentMenu.HOME)}
-        >
+        {/* ----- Menu Bottom ----- */}
+        <Button className="w-full text-left gap-4 my-1 p-3" left>
           <Image
-            src="/img/home-icon.png"
-            alt="home-icon"
+            src="/img/menu-icon.png"
+            alt="menu-icon"
             height={22}
             width={22}
           />
-          <SubTitle size="lg" bold={currentMenu === CurrentMenu.HOME}>
-            หน้าหลัก
-          </SubTitle>
-        </Button>
-
-        <Button
-          className="w-full text-left gap-4 my-1 p-3"
-          left
-          onClick={() => handleMenu(CurrentMenu.SEARCH)}
-        >
-          <Image
-            src="/img/search-icon.png"
-            alt="search-icon"
-            height={22}
-            width={22}
-          />
-          <SubTitle size="lg" bold={currentMenu === CurrentMenu.SEARCH}>
-            ค้นหา
-          </SubTitle>
-        </Button>
-
-        <Button
-          className="w-full text-left gap-4 my-1 p-3"
-          left
-          onClick={() => handleMenu(CurrentMenu.EXPLORE)}
-        >
-          <Image
-            src="/img/explore-icon.png"
-            alt="explore-icon"
-            height={22}
-            width={22}
-          />
-          <SubTitle size="lg" bold={currentMenu === CurrentMenu.EXPLORE}>
-            สำรวจ
-          </SubTitle>
-        </Button>
-
-        <Button
-          className="w-full text-left gap-4 my-1 p-3"
-          left
-          onClick={() => handleMenu(CurrentMenu.REELS)}
-        >
-          <Image
-            src="/img/reels-icon.png"
-            alt="reels-icon"
-            height={22}
-            width={22}
-          />
-          <SubTitle size="lg" bold={currentMenu === CurrentMenu.REELS}>
-            Reels
-          </SubTitle>
-        </Button>
-
-        <Button
-          className="w-full text-left gap-4 my-1 p-3"
-          left
-          onClick={() => handleMenu(CurrentMenu.MESSAGE)}
-        >
-          <Image
-            src="/img/chat-icon.png"
-            alt="chat-icon"
-            height={22}
-            width={22}
-          />
-          <SubTitle size="lg" bold={currentMenu === CurrentMenu.MESSAGE}>
-            ข้อความ
-          </SubTitle>
-        </Button>
-
-        <Button
-          className="w-full text-left gap-4 my-1 p-3"
-          left
-          onClick={() => handleMenu(CurrentMenu.LIKE)}
-        >
-          <Image
-            src="/img/like-icon.png"
-            alt="like-icon"
-            height={22}
-            width={22}
-          />
-          <SubTitle size="lg" bold={currentMenu === CurrentMenu.LIKE}>
-            การแจ้งเตือน
-          </SubTitle>
-        </Button>
-
-        <Button
-          className="w-full text-left gap-4 my-1 p-3"
-          left
-          onClick={() => handleMenu(CurrentMenu.ADD)}
-        >
-          <Image
-            src="/img/add-icon.png"
-            alt="add-icon"
-            height={22}
-            width={22}
-          />
-          <SubTitle size="lg" bold={currentMenu === CurrentMenu.ADD}>
-            สร้าง
-          </SubTitle>
-        </Button>
-
-        <Button
-          className="w-full text-left gap-4 my-1 p-3"
-          left
-          onClick={() => handleMenu(CurrentMenu.PROFILE)}
-        >
-          {posts[0] && (
-            <Profile url={posts[0].url} id={posts[0].id} size="xs" />
+          {isExpand && (
+            <SubTitle size="lg" bold={currentMenu === CurrentMenu.PROFILE}>
+              เพิ่มเติม
+            </SubTitle>
           )}
-          <SubTitle size="lg" bold={currentMenu === CurrentMenu.PROFILE}>
-            โปรไฟล์
-          </SubTitle>
         </Button>
+        {/* ----- Menu Bottom End ----- */}
       </div>
-
-      <Button className="w-full text-left gap-4 my-1 p-3" left>
-        <Image
-          src="/img/menu-icon.png"
-          alt="menu-icon"
-          height={22}
-          width={22}
-        />
-        <SubTitle size="lg" bold={currentMenu === CurrentMenu.PROFILE}>
-          เพิ่มเติม
-        </SubTitle>
-      </Button>
     </div>
   );
 };

@@ -8,9 +8,7 @@ const Home = () => {
   return (
     <div className="flex justify-between">
       <div className="w-full min-h-screen flex flex-col justify-self-center px-3 md:px-0 md:flex-row md:justify-self-auto md:justify-between">
-        <div className="hidden md:block w-full max-w-61">
-          <SideBar />
-        </div>
+        <SideBar />
 
         <div className="block md:hidden h-15 w-full px-4">mobile box top</div>
 
