@@ -4,10 +4,12 @@ import { PostDetail } from "@/constant/api";
 
 interface postsSliceState {
   posts: PostDetail[];
+  searchResult: PostDetail[];
 }
 
 const initialState: postsSliceState = {
   posts: [],
+  searchResult: [],
 };
 
 const postsSlice = createSlice({
@@ -17,9 +19,12 @@ const postsSlice = createSlice({
     setPosts(state, action: PayloadAction<PostDetail[]>) {
       state.posts = action.payload;
     },
+    setSearchResult(state, action: PayloadAction<PostDetail[]>) {
+      state.searchResult = action.payload;
+    },
   },
 });
 
-export const { setPosts } = postsSlice.actions;
+export const { setPosts, setSearchResult } = postsSlice.actions;
 
 export default postsSlice.reducer;

@@ -1,5 +1,10 @@
 import React, { FC, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import clsx from "clsx";
+
+import { setSearchResult } from "@/redux/reducers/postSlice";
+
+import type { RootState } from "@/redux/store";
 
 import Input from "@/components/Input";
 import Button from "@/components/Button";
@@ -15,13 +20,33 @@ const SearchInput: FC<SearchInputProps> = ({
   autoFocus,
   isOpenSearch,
 }) => {
+  const posts = useSelector((state: RootState) => state.posts.posts);
+  const dispatch = useDispatch();
+
   const [isFocus, setIsFocus] = useState(false);
+  const [valueSearch, setValueSearch] = useState("");
 
   const handleFocus = () => setIsFocus(true);
   const handleBlur = () => setTimeout(() => setIsFocus(false), 150);
 
+  const handleSearch = (value: string) => {
+    if (!value) {
+      dispatch(setSearchResult([]));
+      return;
+    }
+    const result = posts.filter((post) => post.id.includes(value));
+    dispatch(setSearchResult(result));
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setValueSearch(value);
+    handleSearch(value);
+  };
+
   const handleClean = () => {
-    console.log("clean--");
+    setValueSearch("");
+    dispatch(setSearchResult([]));
   };
 
   return (
@@ -36,9 +61,10 @@ const SearchInput: FC<SearchInputProps> = ({
             "mb-6 w-full h-10",
             isFocus && "px-0 pl-4 pr-10"
           )}
+          value={valueSearch}
           placeholder="ค้นหา"
           autoFocus={autoFocus}
-          onChange={() => console.log("ins--")}
+          onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
           prefix={

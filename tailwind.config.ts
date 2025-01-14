@@ -45,6 +45,9 @@ export default {
       fontSize: {
         "2.5xl": "1.6rem",
       },
+      lineHeight: {
+        1.2: "1.2",
+      },
     },
   },
   plugins: [],
