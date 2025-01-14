@@ -3,6 +3,7 @@ import React from "react";
 import { Navbar } from "@/features/Navbar";
 import { SideBar } from "@/features/SideBar";
 import { PostInfinite } from "@/features/PostInfinite";
+import { SideAccount } from "@/features/SideAccount";
 
 const Home = () => {
   return (
@@ -22,10 +23,11 @@ const Home = () => {
             </div>
             <div>box 2.3</div>
           </div>
+
+          <SideAccount />
         </div>
 
         <div className="block md:hidden h-12 w-full">mobile box bottom</div>
-        <div className="hidden lg:block w-full max-w-80">box 3</div>
       </div>
     </div>
   );
