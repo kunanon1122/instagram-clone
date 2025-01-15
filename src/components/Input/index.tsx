@@ -15,6 +15,7 @@ export type InputProps = {
   value?: string;
   placeholder?: string;
   prefix?: React.ReactNode;
+  isMobile?: boolean;
 };
 
 const Input: FC<InputProps> = ({
@@ -30,6 +31,7 @@ const Input: FC<InputProps> = ({
   value,
   placeholder,
   prefix,
+  isMobile,
 }) => {
   const themeClasses = {
     primary: "bg-stone-100",
@@ -38,7 +40,12 @@ const Input: FC<InputProps> = ({
   return (
     <div className="flex items-center">
       {prefix && (
-        <div className="flex items-center pl-4 -mt-6 h-10 bg-stone-100 rounded-l-lg">
+        <div
+          className={clsx(
+            "flex items-center bg-stone-100 rounded-l-lg",
+            isMobile ? "h-9 pl-2" : "pl-4 -mt-6 h-10"
+          )}
+        >
           {prefix}
         </div>
       )}

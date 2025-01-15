@@ -1,50 +1,29 @@
-import React, { useMemo } from "react";
-import { useSelector } from "react-redux";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import React from "react";
+import Image from "next/image";
 
-import type { RootState } from "@/redux/store";
-
-import Profile from "@/components/Profile";
-import SubTitle from "@/components/SubTitle";
+import { SearchInput } from "@/features/Search";
 
 export const Navbar = () => {
-  const posts = useSelector((state: RootState) => state.posts.posts);
-
-  const breakPoints = useMemo(() => {
-    const breakPoints: { [key: number]: { slidesPerView: number } } = {};
-
-    for (let i = 150, slides = 2; i <= 510; i += 60, slides++) {
-      breakPoints[i] = { slidesPerView: slides };
-    }
-
-    return breakPoints;
-  }, []);
-
   return (
-    <div>
-      <Swiper
-        spaceBetween={10}
-        breakpoints={breakPoints}
-        modules={[Navigation]}
-        navigation
-        slidesPerGroup={4}
-      >
-        {posts.map((post) => (
-          <SwiperSlide key={post.id}>
-            <Profile
-              key={post.id}
-              url={post.url}
-              id={post.id}
-              size="lg"
-              border
-            />
-            <SubTitle className="text-center" truncate size="sm">
-              {post.id}
-            </SubTitle>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <div className="flex justify-between items-center h-full">
+      <Image
+        priority
+        src="/img/instagram_logo.svg"
+        alt="instagram_logo"
+        height={37}
+        width={109}
+      />
+      <div className="flex items-center gap-4">
+        <div>
+          <SearchInput isOpenSearch isMobile />
+        </div>
+        <Image
+          src="/img/like-icon.png"
+          alt="like-icon.png"
+          height={24}
+          width={24}
+        />
+      </div>
     </div>
   );
 };

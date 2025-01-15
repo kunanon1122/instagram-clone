@@ -82,8 +82,8 @@ export const PostInfinite = () => {
 
   return (
     <div>
-      {posts.map((post) => (
-        <CardPostMain key={post.id} post={post} />
+      {posts.map((post, index) => (
+        <CardPostMain key={`${post.id}-${index}`} post={post} />
       ))}
       {isFetching && (
         <div className="w-full flex justify-center mt-10 mb-5">

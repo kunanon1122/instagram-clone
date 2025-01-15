@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import clsx from "clsx";
 
@@ -9,22 +9,27 @@ import type { RootState } from "@/redux/store";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 
+import { SearchResult } from "@/features/Search";
+
 export type SearchInputProps = {
   className?: string;
   autoFocus?: boolean;
   isOpenSearch?: boolean;
+  isMobile?: boolean;
 };
 
 const SearchInput: FC<SearchInputProps> = ({
   className,
   autoFocus,
   isOpenSearch,
+  isMobile,
 }) => {
   const posts = useSelector((state: RootState) => state.posts.posts);
   const dispatch = useDispatch();
 
   const [isFocus, setIsFocus] = useState(false);
   const [valueSearch, setValueSearch] = useState("");
+  const [openMobileSearch, setOpenMobileSearch] = useState(false);
 
   const handleFocus = () => setIsFocus(true);
   const handleBlur = () => setTimeout(() => setIsFocus(false), 150);
@@ -49,6 +54,14 @@ const SearchInput: FC<SearchInputProps> = ({
     dispatch(setSearchResult([]));
   };
 
+  useEffect(() => {
+    if (isMobile && isFocus) {
+      setOpenMobileSearch(true);
+    } else {
+      setOpenMobileSearch(false);
+    }
+  }, [isFocus, isMobile]);
+
   return (
     <div className="relative">
       {isOpenSearch && (
@@ -57,10 +70,12 @@ const SearchInput: FC<SearchInputProps> = ({
           name="search"
           key="search"
           className={clsx(
+            "w-full",
             className,
-            "mb-6 w-full h-10",
+            isMobile ? "h-9" : "mb-6 h-10",
             isFocus && "px-0 pl-4 pr-10"
           )}
+          isMobile={isMobile}
           value={valueSearch}
           placeholder="ค้นหา"
           autoFocus={autoFocus}
@@ -87,6 +102,11 @@ const SearchInput: FC<SearchInputProps> = ({
             <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z" />
           </svg>
         </Button>
+      )}
+      {openMobileSearch && (
+        <div className="absolute bg-white w-72 top-11 -right-6 shadow-box-shadow rounded-lg">
+          <SearchResult isMobile />
+        </div>
       )}
     </div>
   );

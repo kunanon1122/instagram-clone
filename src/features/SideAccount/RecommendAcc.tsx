@@ -17,8 +17,8 @@ export const RecommendAcc = () => {
 
   return (
     <div>
-      {fiveAcc.map((post) => (
-        <div key={post.id} className="flex justify-between py-2">
+      {fiveAcc.map((post, index) => (
+        <div key={`${post.id}-${index}`} className="flex justify-between py-2">
           <div className="flex">
             <Profile url={post.url} id={post.id} size="md" />
             <div className="flex flex-col justify-center ml-3">

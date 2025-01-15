@@ -49,6 +49,10 @@ export default {
       lineHeight: {
         1.2: "1.2",
       },
+      boxShadow: {
+        "box-shadow":
+          "0 0 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06)",
+      },
     },
   },
   plugins: [],
