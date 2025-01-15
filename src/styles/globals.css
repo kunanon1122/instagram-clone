@@ -2,20 +2,125 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.swiper-button-next {
+  margin-top: -33px;
+}
+
+.swiper-button-prev {
+  margin-top: -33px;
+}
+
+.swiper-button-next:after,
+.swiper-rtl .swiper-button-prev:after {
+  font-size: 10px;
+  font-weight: 1000;
+  background: #fff;
+  border-radius: 9999px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999e9f;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after {
+  font-size: 10px;
+  font-weight: 1000;
+  background: #fff;
+  border-radius: 9999px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999e9f;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.swiper-button-disabled {
+  display: none;
+}
+
+.rainbow-border {
+  position: relative;
+  display: inline-block;
+  margin: 2px 0px 0px 2px;
+}
+
+.rainbow-border::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #e9c868, #eab308, #ef4444, #ec4899);
+  border-radius: 100%;
+  z-index: -1;
+}
+
+/* animation like slide top */
+.like-item-shake-slide-top {
+  animation: shake-center 0.7s linear 0s, slide-out-blurred-top 1.2s linear 0.7s;
+}
+
+/* animation like slide top */
+@keyframes slide-out-blurred-top {
+  4% {
+    transform: translateY(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1000px);
+    filter: blur(40px);
+    opacity: 0;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+/* animation like shake */
+@keyframes shake-center {
+  0% {
+    transform: rotate(0deg);
+    transform-origin: 50% 50%;
+  }
+  10% {
+    transform: rotate(8deg);
+  }
+  20% {
+    transform: rotate(-10deg);
+  }
+  30% {
+    transform: rotate(10deg);
+  }
+  40% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(10deg);
+  }
+  60% {
+    transform: rotate(-10deg);
+  }
+  70% {
+    transform: rotate(10deg);
+  }
+  80% {
+    transform: rotate(-8deg);
+  }
+  90% {
+    transform: rotate(8deg);
+  }
+  100% {
+    transform: rotate(0deg);
+    transform-origin: 50% 50%;
+  }
 }
