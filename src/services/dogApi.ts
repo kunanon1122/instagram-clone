@@ -8,9 +8,9 @@ export const dogApi = createApi({
   reducerPath: "dogApi",
   baseQuery: fetchBaseQuery({ baseUrl: DOG_HOST_API }),
   endpoints: (builder) => ({
-    getDogs: builder.query<PostDetail[], void>({
-      query: () => ({
-        url: "/v1/images/search?page=1&has_breeds=false&limit=10",
+    getDogs: builder.query<PostDetail[], number>({
+      query: (page = 1) => ({
+        url: `/v1/images/search?page=${page}&has_breeds=false&limit=10`,
         method: "GET",
       }),
     }),
