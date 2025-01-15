@@ -94,6 +94,7 @@ export const PostInfinite = () => {
         <CardPostMain
           key={`${post.id}-${index}`}
           post={post}
+          user={posts[0].id}
           onDoubleClick={(e) => handleDoubleClick(post, e)}
         />
       ))}

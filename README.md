@@ -19,6 +19,7 @@ This project features a modern and responsive design cloned from Instagram and c
 - **Search Box**: Search Box to search posts.
 - **Infinite Scroll**: Load posts continuously without end.
 - **Likes**: Like on post. Heart emoji animation effect pops up from the image when liked, similar to Instagram.
+- **Comments**: User can add comments to posts.
 
 ## Getting Started
 
