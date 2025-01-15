@@ -58,6 +58,7 @@ const CardPostMain: FC<CardPostMainProps> = ({ post, user, onDoubleClick }) => {
       </div>
       <div onDoubleClick={handleDoubleClick}>
         <Image
+          className="rounded-md"
           unoptimized
           src={post.url}
           alt={post.id}
@@ -98,14 +99,13 @@ const CardPostMain: FC<CardPostMainProps> = ({ post, user, onDoubleClick }) => {
           width={24}
         />
       </div>
-      <Title>ถูกใจ 0 คน</Title>
+      <Title>ถูกใจ {isLiked ? 1 : 0} คน</Title>
+
       <div className="flex gap-1 items-center">
         <Title>{post.id}</Title>
         <SubTitle size="sm">{post.id}</SubTitle>
       </div>
-      {/* <SubTitle className="mt-1" size="sm" gray>
-        เพิ่มความคิดเห็น
-      </SubTitle> */}
+
       <SubTitle gray>ดูความคิดเห็นทั้งหมด</SubTitle>
       {comment.map((text, index) => (
         <div key={index} className="flex gap-1 items-center">
@@ -113,6 +113,7 @@ const CardPostMain: FC<CardPostMainProps> = ({ post, user, onDoubleClick }) => {
           <SubTitle size="sm">{text}</SubTitle>
         </div>
       ))}
+
       <form
         className="flex justify-between gap-2 mt-2"
         onSubmit={handleComment}

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
 
 import type { RootState } from "@/redux/store";
 import { setPosts } from "@/redux/reducers/postSlice";
@@ -56,7 +57,7 @@ export const PostInfinite = () => {
   }, [isFetching, page]);
 
   const handleDoubleClick = (post: PostDetail, event: React.MouseEvent) => {
-    setMousePosition({ x: event.pageX - 40, y: event.pageY - 45 });
+    setMousePosition({ x: event.pageX - 30, y: event.pageY - 30 });
     setShowHeart(true);
     setTimeout(() => setShowHeart(false), 1800);
   };
@@ -115,7 +116,12 @@ export const PostInfinite = () => {
             pointerEvents: "none",
           }}
         >
-          ♥️
+          <Image
+            src="/img/liked-icon.png"
+            alt="liked-icon"
+            height={64}
+            width={64}
+          />
         </div>
       )}
     </div>
