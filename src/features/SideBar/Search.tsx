@@ -35,12 +35,10 @@ export const Search: FC<SearchProps> = ({ isOpenSearch }) => {
       <SubTitle className="my-2 pt-3 pl-6 pr-3 pb-7" bold size="2.5xl">
         ค้นหา
       </SubTitle>
-
       <div className="mx-4">
         <SearchInput isOpenSearch={isOpenSearch} autoFocus />
       </div>
-
-      {isEmptyResult ? (
+      {isEmptyResult && (
         <div>
           <hr />
 
@@ -53,8 +51,9 @@ export const Search: FC<SearchProps> = ({ isOpenSearch }) => {
             </SubTitle>
           </div>
         </div>
-      ) : (
-        <div className="-mt-3">
+      )}
+      {!isEmptyResult && (
+        <div className="-mt-3 overflow-auto h-[calc(100vh-150px)]">
           {searchResult.map((result) => (
             <div key={result.id} className="flex px-6 py-2">
               <Profile url={result.url} id={result.id} size="md" />
