@@ -53,3 +53,36 @@ export const menuItems = [
     alt: "add-icon",
   },
 ];
+
+export const mobileMenuItems = [
+  {
+    menu: CurrentMenu.HOME,
+    icon: "/img/home-icon.png",
+    label: "หน้าแรก",
+    alt: "home-icon",
+  },
+  {
+    menu: CurrentMenu.EXPLORE,
+    icon: "/img/explore-icon.png",
+    label: "สำรวจ",
+    alt: "explore-icon",
+  },
+  {
+    menu: CurrentMenu.REELS,
+    icon: "/img/reels-icon.png",
+    label: "Reels",
+    alt: "reels-icon",
+  },
+  {
+    menu: CurrentMenu.ADD,
+    icon: "/img/add-icon.png",
+    label: "สร้าง",
+    alt: "add-icon",
+  },
+  {
+    menu: CurrentMenu.MESSAGE,
+    icon: "/img/chat-icon.png",
+    label: "ข้อความ",
+    alt: "chat-icon",
+  },
+];

@@ -6,6 +6,7 @@ import { PostInfinite } from "@/features/PostInfinite";
 import { SideAccount } from "@/features/SideAccount";
 import { Navbar } from "@/features/Navbar";
 import { Footer } from "@/features/Footer";
+import { MenuBar } from "@/features/MenuBar";
 
 const Home = () => {
   return (
@@ -32,7 +33,9 @@ const Home = () => {
             <Footer />
           </div>
 
-          <div className="block md:hidden h-12 w-full">mobile box bottom</div>
+          <div className="block md:hidden h-12 w-full">
+            <MenuBar />
+          </div>
         </div>
       </div>
     </div>
