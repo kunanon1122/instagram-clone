@@ -67,7 +67,7 @@ const CardPostMain: FC<CardPostMainProps> = ({ post, onDoubleClick }) => {
         />
       </div>
       <Title>ถูกใจ 0 คน</Title>
-      <div className="flex gap-1">
+      <div className="flex gap-1 items-center">
         <Title>{post.id}</Title>
         <SubTitle size="sm">{post.id}</SubTitle>
       </div>

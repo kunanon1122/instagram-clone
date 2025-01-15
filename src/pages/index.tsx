@@ -1,5 +1,7 @@
 import React from "react";
 
+import LoadingPage from "@/components/LoadingPage";
+
 import { SwiperStory } from "@/features/SwiperStory";
 import { SideBar } from "@/features/SideBar";
 import { PostInfinite } from "@/features/PostInfinite";
@@ -11,6 +13,7 @@ import { MenuBar } from "@/features/MenuBar";
 const Home = () => {
   return (
     <div>
+      <LoadingPage />
       <div className="flex justify-between">
         <div className="w-full min-h-screen flex flex-col justify-self-center px-3 md:px-0 md:flex-row md:justify-self-auto md:justify-between">
           <SideBar />
