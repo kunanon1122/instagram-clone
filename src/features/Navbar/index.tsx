@@ -1,22 +1,16 @@
 import React from "react";
 import Image from "next/image";
 
+import { Logo } from "@/components/Icon";
+
 import { SearchInput } from "@/features/Search";
 
 export const Navbar = () => {
   return (
     <div className="flex justify-between items-center h-full">
-      <Image
-        priority
-        src="/img/instagram_logo.svg"
-        alt="instagram_logo"
-        height={37}
-        width={109}
-      />
+      <Logo width="109" height="37" />
       <div className="flex items-center gap-4">
-        <div>
-          <SearchInput isOpenSearch isMobile />
-        </div>
+        <SearchInput isOpenSearch isMobile />
         <Image
           src="/img/like-icon.png"
           alt="like-icon.png"

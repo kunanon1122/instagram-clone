@@ -12,7 +12,7 @@ const LoadingPage = () => {
   const [isShowLoading, setIsShowLoading] = useState(true);
 
   useEffect(() => {
-    if (posts) {
+    if (posts.length > 0) {
       setTimeout(() => {
         setIsShowLoading(false);
       }, 2500);

@@ -12,7 +12,7 @@ import Button from "@/components/Button";
 import SubTitle from "@/components/SubTitle";
 import Profile from "@/components/Profile";
 
-import { Logo } from "@/features/SideBar/Logo";
+import { LogoSideBar } from "@/features/SideBar/LogoSideBar";
 import { More } from "@/features/SideBar/More";
 import { Search } from "@/features/SideBar/Search";
 
@@ -97,7 +97,7 @@ export const SideBar = () => {
     >
       <div className="h-screen sticky z-20 top-0 flex flex-col justify-between border-r border-gray-300 bg-white px-3 pt-2 pb-5">
         <div>
-          <Logo isExpand={isExpand} />
+          <LogoSideBar isExpand={isExpand} />
 
           {menuItems.map((item) => (
             <Button

@@ -24,11 +24,13 @@ export default {
         },
       },
       height: {
+        9.25: "2.313rem",
         15: "3.75rem",
         21: "5.25rem",
         26: "6.5rem",
       },
       width: {
+        27.25: "6.813rem",
         99.25: "24.813rem",
       },
       maxWidth: {
