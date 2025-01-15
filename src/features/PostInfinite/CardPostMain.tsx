@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Image from "next/image";
 
 import Title from "@/components/Title";
@@ -13,6 +13,16 @@ export type CardPostMainProps = {
 };
 
 const CardPostMain: FC<CardPostMainProps> = ({ post, onDoubleClick }) => {
+  const [isLiked, setIsLiked] = useState(false);
+
+  const handleLike = () => {
+    setIsLiked((prev) => !prev);
+  };
+
+  const handleDoubleClick = (e: React.MouseEvent) => {
+    onDoubleClick(e);
+    setIsLiked(true);
+  };
   return (
     <div className="mb-5 relative">
       <div className="flex gap-1 items-center mb-3">
@@ -25,10 +35,9 @@ const CardPostMain: FC<CardPostMainProps> = ({ post, onDoubleClick }) => {
           {post.id}
         </SubTitle>
       </div>
-      <div onDoubleClick={onDoubleClick}>
+      <div onDoubleClick={handleDoubleClick}>
         <Image
           unoptimized
-          className="rounded"
           src={post.url}
           alt={post.id}
           height={post.height || 468}
@@ -38,10 +47,12 @@ const CardPostMain: FC<CardPostMainProps> = ({ post, onDoubleClick }) => {
       <div className="flex justify-between my-2">
         <div className="flex gap-4">
           <Image
-            src="/img/like-icon.png"
-            alt="like-icon.png"
+            className="cursor-pointer"
+            src={isLiked ? "/img/liked-icon.png" : "/img/like-icon.png"}
+            alt={isLiked ? "liked-icon" : "like-icon"}
             height={24}
             width={24}
+            onClick={handleLike}
           />
           <Image
             className="p-0.25"
