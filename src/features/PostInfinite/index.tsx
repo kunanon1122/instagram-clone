@@ -19,6 +19,8 @@ export const PostInfinite = () => {
 
   const [page, setPage] = useState(1);
   const [isFetching, setIsFetching] = useState(false);
+  const [showHeart, setShowHeart] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const prevPageRef = useRef(page);
 
@@ -53,6 +55,12 @@ export const PostInfinite = () => {
     }
   }, [isFetching, page]);
 
+  const handleDoubleClick = (post: PostDetail, event: React.MouseEvent) => {
+    setMousePosition({ x: event.pageX - 40, y: event.pageY - 45 });
+    setShowHeart(true);
+    setTimeout(() => setShowHeart(false), 1800);
+  };
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -83,11 +91,30 @@ export const PostInfinite = () => {
   return (
     <div>
       {posts.map((post, index) => (
-        <CardPostMain key={`${post.id}-${index}`} post={post} />
+        <CardPostMain
+          key={`${post.id}-${index}`}
+          post={post}
+          onDoubleClick={(e) => handleDoubleClick(post, e)}
+        />
       ))}
       {isFetching && (
         <div className="w-full flex justify-center mt-10 mb-5">
           <SpinnerLoading />
+        </div>
+      )}
+      {showHeart && (
+        <div
+          className="like-item-shake-slide-top"
+          style={{
+            position: "absolute",
+            top: mousePosition.y,
+            left: mousePosition.x,
+            fontSize: "4rem",
+            color: "red",
+            pointerEvents: "none",
+          }}
+        >
+          ♥️
         </div>
       )}
     </div>

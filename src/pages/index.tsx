@@ -19,7 +19,7 @@ const Home = () => {
             <Navbar />
           </div>
 
-          <div className="flex-1 flex flex-wrap justify-center items-center mt-14">
+          <div className="flex-1 flex flex-wrap justify-center items-center mt-14 md:mt-0">
             <div className="w-full max-w-157.5 min-h-[calc(100vh-108px)]">
               <div className="h-21 mt-4 mb-6 py-2 md:px-8">
                 <SwiperStory />

@@ -9,11 +9,12 @@ import { PostDetail } from "@/constant/api";
 
 export type CardPostMainProps = {
   post: PostDetail;
+  onDoubleClick: (e: React.MouseEvent) => void;
 };
 
-const CardPostMain: FC<CardPostMainProps> = ({ post }) => {
+const CardPostMain: FC<CardPostMainProps> = ({ post, onDoubleClick }) => {
   return (
-    <div className="mb-5">
+    <div className="mb-5 relative">
       <div className="flex gap-1 items-center mb-3">
         <Profile url={post.url} id={post.id} size="sm" />
         <Title>{post.id}</Title>
@@ -24,14 +25,16 @@ const CardPostMain: FC<CardPostMainProps> = ({ post }) => {
           {post.id}
         </SubTitle>
       </div>
-      <Image
-        unoptimized
-        className="rounded"
-        src={post.url}
-        alt={post.id}
-        height={post.height || 468}
-        width={468}
-      />
+      <div onDoubleClick={onDoubleClick}>
+        <Image
+          unoptimized
+          className="rounded"
+          src={post.url}
+          alt={post.id}
+          height={post.height || 468}
+          width={468}
+        />
+      </div>
       <div className="flex justify-between my-2">
         <div className="flex gap-4">
           <Image
