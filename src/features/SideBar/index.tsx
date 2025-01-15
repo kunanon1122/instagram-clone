@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Image from "next/image";
 import clsx from "clsx";
 
+import { setIsExpand } from "@/redux/reducers/menuSlice";
 import type { RootState } from "@/redux/store";
 
 import useWindowWidth from "@/hook/useWindowWidth";
@@ -19,28 +20,29 @@ import { CurrentMenu, menuItems } from "@/variables/Menu";
 
 export const SideBar = () => {
   const posts = useSelector((state: RootState) => state.posts.posts);
+  const isExpand = useSelector((state: RootState) => state.menu.isExpand);
+  const dispatch = useDispatch();
   const width = useWindowWidth();
 
   const divRef = useRef<HTMLDivElement>(null);
 
   const [currentMenu, setCurrentMenu] = useState<CurrentMenu>(CurrentMenu.HOME);
-  const [isExpand, setIsExpand] = useState(false);
   const [isOpenSearch, setIsOpenSearch] = useState(false);
 
   const handleChangeIsOpenSearch = useCallback(
     (prev: boolean) => {
       if (prev) {
-        if (width && width > 1265) setIsExpand(true);
+        if (width && width > 1265) dispatch(setIsExpand(true));
         setCurrentMenu(CurrentMenu.HOME);
 
         return false;
       } else {
-        setIsExpand(false);
+        dispatch(setIsExpand(false));
 
         return true;
       }
     },
-    [width]
+    [dispatch, width]
   );
 
   const handleMenu = useCallback(
@@ -79,11 +81,11 @@ export const SideBar = () => {
 
   useEffect(() => {
     if (width && width > 1265 && !isOpenSearch) {
-      setIsExpand(true);
+      dispatch(setIsExpand(true));
     } else {
-      setIsExpand(false);
+      dispatch(setIsExpand(false));
     }
-  }, [isOpenSearch, width]);
+  }, [dispatch, isOpenSearch, width]);
 
   return (
     <div
